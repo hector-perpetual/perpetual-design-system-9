@@ -206,9 +206,10 @@ def avatar(x, y, d, initials, fill=ACCENT, fg=WHITE):
 # ===========================================================================
 def s01_portada():
     return (box(0, 4.7, 13.333, 2.8, fill=ACCENT)
-            + blob(9.2, -1.0, 3.2, YELLOW) + blob(11.7, 2.0, 1.9, ACCENT2)
-            + blob(8.2, 1.3, 3.3, ACCENT) + hexagon(8.75, 2.05, 2.1, WHITE)
-            + box(9.45, 2.75, 0.7, 0.7, fill=ACCENT, oval=True) + blob(11.5, 4.45, 0.8, YELLOW)
+            + box(8.7, 1.6, 2.8, 2.8, oval=True, fill="#1a56dbcc")
+            + box(10.2, 1.9, 2.8, 2.8, oval=True, fill="#7e22cecc")
+            + box(9.45, 3.15, 2.8, 2.8, oval=True, fill="#3b82f6cc")
+            + blob(12.45, 1.35, 0.4, YELLOW)
             + logo(0.7, 0.7, 1.6)
             + txt(0.65, 1.65, 7.6, 1.6, AC("Perpetual."), 84, TEXT, 800, lh=0.95)
             + txt(0.7, 3.35, 7.2, 0.5, "Plantilla de presentacion de negocio", 17, DIM, 600)
