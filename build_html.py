@@ -83,7 +83,7 @@ def pill(x, y, w, label, fill=ACCENT, fg=WHITE, arrow=True):
                spacing=0.8, upper=True)]
     if arrow:
         out.append(box(x + w - 0.74, y + 0.1, 0.42, 0.42, fill=WHITE, oval=True))
-        out.append(txt(x + w - 0.74, y + 0.02, 0.42, 0.42, "&rsaquo;", 17, fill, 800, "center", "middle"))
+        out.append(f'<div style="position:absolute;left:{_p(x + w - 0.74)};top:{_p(y + 0.1)};width:{_p(0.42)};height:{_p(0.42)};display:flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="{fill}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg></div>')
     return "".join(out)
 
 
