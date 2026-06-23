@@ -119,9 +119,8 @@ def title(runs, x=0.7, y=0.7, w=8.5, size=33):
 
 def footer(page, dark=False):
     fg = DBE4FF if dark else MUTED
-    return (logo(0.55, 7.02, 0.92, dark=dark)
-            + txt(1.75, 7.0, 7, 0.3, "Confidencial &middot; Perpetual Technologies &copy; 2026",
-                  8.5, fg, 400, "left", "middle")
+    return (txt(0.7, 7.0, 8, 0.3, "Confidencial &middot; Perpetual Technologies &copy; 2026",
+                8.5, fg, 400, "left", "middle")
             + txt(11.7, 7.0, 1.1, 0.3, str(page).zfill(2), 8.5, fg, 400, "right", "middle"))
 
 
@@ -221,7 +220,7 @@ def s01_portada():
 
 def s02_contenido():
     out = [title(f"Tabla de {AC('contenidos.')}"),
-           txt(0.7, 1.9, 6.5, 0.5, "Recorrido completo del negocio en seis bloques.", 13, MUTED, 400)]
+           txt(0.7, 2.5, 6.5, 0.5, "Recorrido completo del negocio en seis bloques.", 13, MUTED, 400)]
     items = [("01", "Resumen de negocio"), ("02", "Analisis de mercado"), ("03", "Ventas"),
              ("04", "Plan de gestion"), ("05", "Plan operativo"), ("06", "Plan financiero")]
     cols = DATA
@@ -229,7 +228,7 @@ def s02_contenido():
         col = i % 2
         row = i // 2
         x = 0.7 + col * 6.2
-        y = 2.7 + row * 1.35
+        y = 3.05 + row * 1.25
         out += [box(x, y, 5.9, 1.1, fill=SURFACE, r=14, line=BORDER),
                 box(x + 0.28, y + 0.25, 0.6, 0.6, fill=cols[i], r=12),
                 txt(x + 0.28, y + 0.25, 0.6, 0.6, n, 15, WHITE, 800, "center", "middle"),
@@ -252,44 +251,49 @@ def s03_divisor():
 
 
 def s04_mision():
-    return (title(f"Nuestra {AC('mision.')}")
-            + blob(10.2, 1.0, 2.6, YELLOW) + hexagon(10.8, 1.7, 1.4, ACCENT)
-            + box(0.7, 2.4, 8.6, 3.7, fill=SURFACE2, r=18)
-            + txt(1.15, 2.85, 1.5, 1.0, "&ldquo;", 80, ACCENT, 800)
-            + txt(1.2, 3.55, 7.6, 2.2,
-                  "Impulsar el crecimiento sostenible de las empresas de Latinoamerica con tecnologia, "
-                  "datos y diseno, convirtiendo la complejidad operativa en ventaja competitiva.",
-                  20, TEXT, 600, lh=1.35)
-            + txt(1.2, 5.45, 7.0, 0.4, "Comite de Direccion &middot; Perpetual Technologies", 11.5, MUTED, 600, upper=True, spacing=0.6)
-            + txt(10.0, 3.0, 2.6, 0.4, "Valores", 11, ACCENT, 700, upper=True, spacing=0.8)
-            + txt(10.0, 3.5, 2.8, 0.4, "Rigor analitico", 13, TEXT, 600)
-            + txt(10.0, 4.0, 2.8, 0.4, "Cercania con el cliente", 13, TEXT, 600)
-            + txt(10.0, 4.5, 2.8, 0.4, "Resultados medibles", 13, TEXT, 600)
-            + footer(4))
+    out = [title(f"Nuestra {AC('mision.')}"),
+           box(0.7, 2.5, 8.4, 3.6, fill=SURFACE2, r=18),
+           txt(1.15, 2.95, 1.5, 1.0, "&ldquo;", 80, ACCENT, 800),
+           txt(1.2, 3.65, 7.4, 2.0,
+               "Impulsar el crecimiento sostenible de las empresas de Latinoamerica con tecnologia, "
+               "datos y diseno, convirtiendo la complejidad operativa en ventaja competitiva.",
+               20, TEXT, 600, lh=1.35),
+           txt(1.2, 5.5, 7.0, 0.4, "Comite de Direccion &middot; Perpetual Technologies", 11.5, MUTED, 600, upper=True, spacing=0.6),
+           # Tarjeta de Valores limpia (sin circulo amarillo ni hexagono)
+           box(9.5, 2.5, 3.1, 3.6, fill=WHITE, r=18, line=BORDER, shadow=True),
+           box(9.5, 2.5, 0.12, 3.6, fill=ACCENT, r=6),
+           txt(9.9, 2.95, 2.5, 0.4, "Valores", 11, ACCENT, 700, upper=True, spacing=0.8)]
+    valores = ["Rigor analitico", "Cercania con el cliente", "Resultados medibles"]
+    for i, v in enumerate(valores):
+        vy = 3.6 + i * 0.72
+        out += [box(9.9, vy + 0.08, 0.16, 0.16, fill=ACCENT, oval=True),
+                txt(10.22, vy - 0.02, 2.2, 0.6, v, 13, TEXT, 600, "left", "middle", lh=1.2)]
+    out.append(footer(4))
+    return "".join(out)
 
 
 def s05_empresa():
     out = [title(f"Nuestra {AC('empresa.')}"),
-           txt(0.7, 1.95, 6.5, 1.6,
+           txt(0.7, 2.5, 6.5, 1.6,
                "Perpetual Technologies acompana a empresas en su transformacion digital: estrategia, "
                "automatizacion y analitica en un mismo socio. Operamos desde 2019 con equipos en Lima, "
                "Bogota y Ciudad de Mexico.", 14, DIM, 400, lh=1.4),
-           graphic(7.7, 2.1, 4.9, 3.6, tint="#DBE7FB", variant="abstract", r=18, shadow=True)]
+           graphic(7.7, 2.5, 4.9, 3.4, tint="#DBE7FB", variant="abstract", r=18, shadow=True)]
     tags = [("Area de negocio", "Consultoria y software B2B", ACCENT),
             ("Ingresos 2025", "USD 4.8M", GREEN)]
     for i, (t, v, col) in enumerate(tags):
         x = 0.7 + i * 3.4
-        out += [box(x, 4.3, 3.2, 1.5, fill=SURFACE, r=14, line=BORDER),
-                box(x, 4.3, 0.12, 1.5, fill=col, r=6),
-                txt(x + 0.35, 4.55, 2.7, 0.4, t, 10.5, MUTED, 700, upper=True, spacing=0.6),
-                txt(x + 0.35, 4.95, 2.7, 0.7, v, 17, TEXT, 800, lh=1.05)]
+        out += [box(x, 4.55, 3.2, 1.5, fill=SURFACE, r=14, line=BORDER),
+                box(x, 4.55, 0.12, 1.5, fill=col, r=6),
+                txt(x + 0.35, 4.8, 2.7, 0.4, t, 10.5, MUTED, 700, upper=True, spacing=0.6),
+                txt(x + 0.35, 5.2, 2.7, 0.7, v, 17, TEXT, 800, lh=1.05)]
     out.append(footer(5))
     return "".join(out)
 
 
 def s06_tendencias():
     out = [title(f"Tendencias de {AC('mercado.')}"),
-           txt(0.7, 1.9, 8.0, 0.5, "Tres fuerzas que redefinen la demanda en nuestro sector.", 13, MUTED, 400)]
+           txt(0.7, 2.5, 8.0, 0.5, "Tres fuerzas que redefinen la demanda en nuestro sector.", 13, MUTED, 400)]
     rows = [("Adopcion de IA en empresas", 50, ACCENT, "innovacion",
              "La mitad de las companias ya pilotea casos de uso de IA."),
             ("Migracion a la nube", 85, GREEN, "crecimiento",
@@ -297,7 +301,7 @@ def s06_tendencias():
             ("Demanda de automatizacion", 70, ACCENT2, "automatizacion",
              "Procesos manuales en reduccion acelerada ano tras ano.")]
     for i, (t, pct, col, icon, d) in enumerate(rows):
-        y = 2.8 + i * 1.35
+        y = 3.25 + i * 1.25
         out += [line_icon(0.7, y - 0.05, 0.78, col, icon),
                 txt(1.85, y - 0.1, 7.0, 0.4, t, 14, TEXT, 700),
                 progress_bar(1.85, y + 0.4, 8.6, pct, fill=col),
@@ -308,54 +312,54 @@ def s06_tendencias():
 
 def s07_competidores():
     out = [title(f"Mapa de {AC('competidores.')}"),
-           txt(0.7, 1.9, 8.0, 0.5, "Cuatro actores principales en el segmento objetivo.", 13, MUTED, 400)]
+           txt(0.7, 2.5, 8.0, 0.5, "Cuatro actores principales en el segmento objetivo.", 13, MUTED, 400)]
     comps = [("Empresa 1", "Lider en consultoria tradicional, fuerte en grandes cuentas.", ACCENT, "estrategia"),
              ("Empresa 2", "Plataforma de automatizacion con enfoque self-service.", ACCENT2, "producto"),
              ("Empresa 3", "Boutique de datos especializada en retail y banca.", GREEN, "analitica"),
              ("Empresa 4", "Integrador regional con amplia red de partners.", PURPLE, "alcance")]
     for i, (n, d, col, icon) in enumerate(comps):
         x = 0.7 + i * 3.05
-        out += [box(x, 2.7, 2.85, 3.4, fill=SURFACE, r=16, line=BORDER, shadow=True),
-                box(x, 2.7, 2.85, 0.14, fill=col, r=6),
-                line_icon(x + 0.35, 3.15, 0.85, col, icon),
-                txt(x + 0.35, 4.25, 2.2, 0.4, n, 15, TEXT, 800),
-                txt(x + 0.35, 4.7, 2.2, 1.2, d, 11, MUTED, 400, lh=1.35)]
+        out += [box(x, 2.95, 2.85, 3.3, fill=SURFACE, r=16, line=BORDER, shadow=True),
+                box(x, 2.95, 2.85, 0.14, fill=col, r=6),
+                line_icon(x + 0.35, 3.4, 0.85, col, icon),
+                txt(x + 0.35, 4.5, 2.2, 0.4, n, 15, TEXT, 800),
+                txt(x + 0.35, 4.95, 2.2, 1.2, d, 11, MUTED, 400, lh=1.35)]
     out.append(footer(7))
     return "".join(out)
 
 
 def s08_vs():
     out = [title(f"Nosotros {AC('vs ellos.')}"),
-           txt(0.7, 1.9, 8.0, 0.5, "Como nos comparamos en las metricas que importan.", 13, MUTED, 400)]
+           txt(0.7, 2.5, 8.0, 0.5, "Como nos comparamos en las metricas que importan.", 13, MUTED, 400)]
     panels = [("Nosotros", ACCENT, 0.7, [("Satisfaccion", 94, ACCENT), ("Retencion", 88, GREEN), ("Tiempo a valor", 82, ACCENT2)]),
               ("Ellos", MUTED, 6.85, [("Satisfaccion", 71, MUTED), ("Retencion", 65, MUTED), ("Tiempo a valor", 58, MUTED)])]
     for label, hdr, x, metrics in panels:
-        out += [box(x, 2.65, 5.75, 3.6, fill=SURFACE if label == "Ellos" else "#eef3fe", r=18,
+        out += [box(x, 2.95, 5.75, 3.4, fill=SURFACE if label == "Ellos" else "#eef3fe", r=18,
                     line=BORDER if label == "Ellos" else None),
-                box(x + 0.4, 2.95, 2.6, 0.5, fill=hdr, r=12),
-                txt(x + 0.4, 2.95, 2.6, 0.5, label, 12, WHITE, 700, "center", "middle", upper=True, spacing=0.8)]
+                box(x + 0.4, 3.25, 2.6, 0.5, fill=hdr, r=12),
+                txt(x + 0.4, 3.25, 2.6, 0.5, label, 12, WHITE, 700, "center", "middle", upper=True, spacing=0.8)]
         for j, (mt, pct, col) in enumerate(metrics):
             dx = x + 1.4 + j * 1.55
-            out += [donut(dx, 4.55, 0.55, pct, fill=col, label=mt)]
+            out += [donut(dx, 4.85, 0.55, pct, fill=col, label=mt)]
     out.append(footer(8))
     return "".join(out)
 
 
 def s09_tamano():
     out = [title(f"Tamano de {AC('mercado.')}"),
-           txt(0.7, 1.9, 8.0, 0.5, "Participacion estimada por actor en el mercado direccionable.", 13, MUTED, 400)]
+           txt(0.7, 2.5, 8.0, 0.5, "Participacion estimada por actor en el mercado direccionable.", 13, MUTED, 400)]
     # burbujas: (cx, cy, d, fill, pct)
-    bubbles = [(5.0, 4.1, 2.4, ACCENT, "40%"), (8.0, 3.4, 1.7, ACCENT2, "25%"),
-               (9.9, 5.0, 1.55, GREEN, "20%"), (6.9, 5.6, 1.2, PURPLE, "15%")]
+    bubbles = [(5.0, 4.5, 2.4, ACCENT, "40%"), (8.0, 3.85, 1.7, ACCENT2, "25%"),
+               (9.9, 5.35, 1.55, GREEN, "20%"), (6.9, 5.95, 1.2, PURPLE, "15%")]
     for cx, cy, d, fill, pct in bubbles:
         out.append(bubble(cx, cy, d, fill, pct))
     # leyenda
     legend = [("Empresa 1", ACCENT), ("Empresa 2", ACCENT2), ("Empresa 3", GREEN), ("Empresa 4", PURPLE)]
     for i, (n, col) in enumerate(legend):
-        y = 2.9 + i * 0.62
+        y = 3.35 + i * 0.62
         out += [box(0.75, y, 0.28, 0.28, fill=col, r=6),
                 txt(1.2, y - 0.06, 2.6, 0.4, n, 12.5, TEXT, 600, "left", "middle")]
-    out.append(txt(0.75, 5.6, 3.0, 0.8, "Mercado direccionable estimado en USD 320M para 2027.",
+    out.append(txt(0.75, 5.85, 3.2, 0.8, "Mercado direccionable estimado en USD 320M para 2027.",
                    11, MUTED, 400, lh=1.35))
     out.append(footer(9))
     return "".join(out)
@@ -363,7 +367,7 @@ def s09_tamano():
 
 def s10_precios():
     out = [title(f"Planes de {AC('precios.')}"),
-           txt(0.7, 1.9, 8.0, 0.5, "Estructura modular pensada para cada etapa del cliente.", 13, MUTED, 400)]
+           txt(0.7, 2.45, 8.0, 0.5, "Estructura modular pensada para cada etapa del cliente.", 13, MUTED, 400)]
     plans = [
         ("Gratis", "$0", "/mes", False, ["Diagnostico inicial", "1 usuario", "Reportes basicos", "Soporte por correo"]),
         ("Estandar", "$20", "/mes", True, ["Todo lo de Gratis", "5 usuarios", "Dashboards en vivo", "Automatizaciones", "Soporte prioritario"]),
@@ -374,38 +378,38 @@ def s10_precios():
         fill = ACCENT if hl else WHITE
         fg = WHITE if hl else TEXT
         sub = DBE4FF if hl else MUTED
-        out += [box(x, 2.55, 3.7, 4.05, fill=fill, r=18, shadow=True, line=None if hl else BORDER)]
+        out += [box(x, 2.9, 3.7, 4.0, fill=fill, r=18, shadow=True, line=None if hl else BORDER)]
         if hl:
-            out += [box(x + 1.25, 2.3, 1.2, 0.42, fill=YELLOW, r=10),
-                    txt(x + 1.25, 2.3, 1.2, 0.42, "Popular", 9.5, BGD, 800, "center", "middle", upper=True, spacing=0.6)]
-        out += [txt(x + 0.45, 2.85, 3.0, 0.4, name, 14, sub, 700, upper=True, spacing=0.8),
-                txt(x + 0.45, 3.25, 3.0, 0.8, price, 42, fg, 800),
-                txt(x + 0.45 + (1.6 if len(price) == 2 else 1.95), 3.62, 1.0, 0.4, per, 12, sub, 600)]
+            out += [box(x + 1.25, 2.66, 1.2, 0.42, fill=YELLOW, r=10),
+                    txt(x + 1.25, 2.66, 1.2, 0.42, "Popular", 9.5, BGD, 800, "center", "middle", upper=True, spacing=0.6)]
+        out += [txt(x + 0.45, 3.18, 3.0, 0.4, name, 14, sub, 700, upper=True, spacing=0.8),
+                txt(x + 0.45, 3.58, 3.0, 0.8, price, 42, fg, 800),
+                txt(x + 0.45 + (1.6 if len(price) == 2 else 1.95), 3.95, 1.0, 0.4, per, 12, sub, 600)]
         for j, f in enumerate(feats):
-            fy = 4.3 + j * 0.36
+            fy = 4.55 + j * 0.33
             dot = WHITE if hl else ACCENT
             out += [box(x + 0.45, fy + 0.07, 0.13, 0.13, fill=dot, oval=True),
                     txt(x + 0.72, fy - 0.02, 2.8, 0.34, f, 10.8, fg if hl else DIM, 400)]
         bfill = WHITE if hl else ACCENT
         bfg = ACCENT if hl else WHITE
-        out.append(pill(x + 0.45, 6.0, 2.8, "Elegir plan", fill=bfill, fg=bfg, arrow=False))
+        out.append(pill(x + 0.45, 6.2, 2.8, "Elegir plan", fill=bfill, fg=bfg, arrow=False))
     out.append(footer(10))
     return "".join(out)
 
 
 def s11_equipo():
     out = [title(f"Nuestro {AC('equipo.')}"),
-           txt(0.7, 1.9, 8.0, 0.5, "Liderazgo multidisciplinario con foco en ejecucion.", 13, MUTED, 400)]
+           txt(0.7, 2.5, 8.0, 0.5, "Liderazgo multidisciplinario con foco en ejecucion.", 13, MUTED, 400)]
     members = [("Ana Rojas", "Directora General", "AR", ACCENT),
                ("Luis Vega", "Director de Tecnologia", "LV", GREEN),
                ("Mara Diaz", "Directora de Operaciones", "MD", ACCENT2)]
     for i, (n, role, ini, col) in enumerate(members):
         x = 0.85 + i * 4.05
-        out += [box(x, 2.7, 3.55, 3.5, fill=SURFACE, r=18, line=BORDER, shadow=True),
-                avatar(x + 1.15, 3.15, 1.25, ini, fill=col),
-                txt(x, 4.6, 3.55, 0.4, n, 16, TEXT, 800, "center"),
-                txt(x, 5.05, 3.55, 0.4, role, 11.5, ACCENT, 600, "center", upper=True, spacing=0.4),
-                txt(x + 0.45, 5.5, 2.65, 0.6, "Mas de 10 anos liderando equipos en la region.",
+        out += [box(x, 2.9, 3.55, 3.4, fill=SURFACE, r=18, line=BORDER, shadow=True),
+                avatar(x + 1.15, 3.35, 1.25, ini, fill=col),
+                txt(x, 4.8, 3.55, 0.4, n, 16, TEXT, 800, "center"),
+                txt(x, 5.25, 3.55, 0.4, role, 11.5, ACCENT, 600, "center", upper=True, spacing=0.4),
+                txt(x + 0.45, 5.7, 2.65, 0.6, "Mas de 10 anos liderando equipos en la region.",
                     10.5, MUTED, 400, "center", lh=1.3)]
     out.append(footer(11))
     return "".join(out)
@@ -413,7 +417,7 @@ def s11_equipo():
 
 def s12_testimonios():
     out = [title(f"Lo que dicen {AC('los clientes.')}"),
-           txt(0.7, 1.9, 8.0, 0.5, "Resultados reales de companias que confiaron en Perpetual.", 13, MUTED, 400)]
+           txt(0.7, 2.5, 8.0, 0.5, "Resultados reales de companias que confiaron en Perpetual.", 13, MUTED, 400)]
     quotes = [
         ("Reducimos el tiempo de cierre mensual de diez dias a dos. El equipo de Perpetual entendio "
          "nuestro negocio desde la primera semana.", "Carla Mendoza", "CFO, Grupo Andina", ACCENT),
@@ -422,13 +426,13 @@ def s12_testimonios():
     ]
     for i, (q, name, role, col) in enumerate(quotes):
         x = 0.7 + i * 6.2
-        out += [box(x, 2.6, 5.9, 3.7, fill=SURFACE, r=18, line=BORDER, shadow=True),
-                txt(x + 0.45, 2.7, 2.0, 1.0, "&ldquo;", 78, col, 800),
-                txt(x + 0.5, 3.65, 5.0, 1.6, q, 14, TEXT, 600, lh=1.4),
-                box(x + 0.5, 5.55, 0.55, 0.55, fill=col, oval=True),
-                txt(x + 0.5, 5.55, 0.55, 0.55, "".join(w[0] for w in name.split()[:2]), 13, WHITE, 800, "center", "middle"),
-                txt(x + 1.25, 5.5, 4.4, 0.35, name, 13, TEXT, 800),
-                txt(x + 1.25, 5.85, 4.4, 0.35, role, 10.5, MUTED, 600, upper=True, spacing=0.4)]
+        out += [box(x, 2.85, 5.9, 3.5, fill=SURFACE, r=18, line=BORDER, shadow=True),
+                txt(x + 0.45, 2.95, 2.0, 1.0, "&ldquo;", 78, col, 800),
+                txt(x + 0.5, 3.9, 5.0, 1.6, q, 14, TEXT, 600, lh=1.4),
+                box(x + 0.5, 5.62, 0.55, 0.55, fill=col, oval=True),
+                txt(x + 0.5, 5.62, 0.55, 0.55, "".join(w[0] for w in name.split()[:2]), 13, WHITE, 800, "center", "middle"),
+                txt(x + 1.25, 5.57, 4.4, 0.35, name, 13, TEXT, 800),
+                txt(x + 1.25, 5.92, 4.4, 0.35, role, 10.5, MUTED, 600, upper=True, spacing=0.4)]
     out.append(footer(12))
     return "".join(out)
 
