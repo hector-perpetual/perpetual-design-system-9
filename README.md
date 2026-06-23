@@ -44,3 +44,7 @@ Cada slide mide 1280x720 px (coordenadas en pulgadas x 96).
 - Sin fotos de personas: los avatares son circulos con iniciales o iconos
   hexagonales.
 - Paleta de datos: `#1a56db`, `#f97316`, `#059669`, `#fbb900`, `#7e22ce`, `#6b7280`.
+
+## Marca (fuente de verdad)
+
+La carpeta `brand/` contiene los tokens, componentes y reglas de marca de Perpetual (SKILL.md + references). Este repo es autosuficiente: diseno, fuentes (Armin Grotesk embebida), logos y reglas de marca en un solo lugar.
